@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using Cint.RobotCleaner.Client;
 using Cint.RobotCleaner.Core.Impl;
-using Microsoft.VisualBasic;
 using NUnit.Framework;
 
 namespace Cint.RobotCleaner.Tests

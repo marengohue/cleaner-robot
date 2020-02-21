@@ -5,9 +5,13 @@ using Cint.RobotCleaner.Core.Impl;
 
 namespace Cint.RobotCleaner.Client
 {
+    /// <summary>
+    /// The parser of the input data, used to
+    /// either format the input files or parse the user KB input
+    /// </summary>
     public class InputParser
     {
-        private TextReader reader;
+        private readonly TextReader reader;
 
         public InputParser(Stream input)
         {
@@ -68,6 +72,7 @@ namespace Cint.RobotCleaner.Client
 
         private IntVector2 GetNextMove()
         {
+            // ReSharper disable once PossibleNullReferenceException
             var parts = reader.ReadLine().Split(' ');
             var (x, y) = GetVectorFromDirection(parts[0]);
             if (int.TryParse(parts[1], out int distance))

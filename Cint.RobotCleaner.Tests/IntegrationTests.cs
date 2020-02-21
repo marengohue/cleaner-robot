@@ -1,4 +1,7 @@
-﻿using Cint.RobotCleaner.Core;
+﻿using System.IO;
+using System.IO.Pipes;
+using System.Text;
+using Cint.RobotCleaner.Client;
 using Cint.RobotCleaner.Core.Impl;
 using NUnit.Framework;
 
@@ -29,5 +32,23 @@ namespace Cint.RobotCleaner.Tests
             Assert.AreEqual(4001*4001-4000, nav.DistinctPointsVisited);
         }
 
+        /// <summary>
+        /// This is a full test described in the task doc
+        /// </summary>
+        [Test]
+        public void Integration_DocSampleTest()
+        {
+            var sampleInput = "2\n10 22\nE 2\nN 1";
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(sampleInput));
+            var parser = new InputParser(stream);
+            var nav = new Navigator<IntVector2>(parser.StartingPoint, new StraightPathFinder2D());
+
+            foreach (var move in parser.Moves)
+            {
+                nav.Move(move);
+            }
+
+            Assert.AreEqual(4, nav.DistinctPointsVisited);
+        }
     }
 }
