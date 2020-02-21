@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Cint.RobotCleaner.Core
+namespace Cint.RobotCleaner.Core.Impl
 {
     /// <inheritdoc cref="ITranslatable{TCoordinate}"/>
     public struct IntVector2 : ITranslatable<IntVector2>
@@ -25,11 +24,6 @@ namespace Cint.RobotCleaner.Core
         public IntVector2 Translate(IntVector2 other)
         {
             return new IntVector2(X + other.X, Y + other.Y);
-        }
-
-        public IEnumerable<IntVector2> GetIntermediatePoints(IntVector2 other)
-        {
-            var deltaPoint = new IntVector2(Math.Abs(other.X - X), Math.Abs(other.Y - Y));
         }
 
         public override int GetHashCode()

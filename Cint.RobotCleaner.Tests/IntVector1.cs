@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Cint.RobotCleaner.Core;
 
 namespace Cint.RobotCleaner.Tests
@@ -11,13 +8,14 @@ namespace Cint.RobotCleaner.Tests
     /// Maps the navigator space into R1 (a straight 1D line)
     /// Contains sample and generated implementations of the methods
     /// </summary>
-    [DebuggerDisplay("v1({" + nameof(offset) + "})")]
+    [DebuggerDisplay("v1({" + nameof(Offset) + "})")]
     struct IntVector1 : ITranslatable<IntVector1>
     {
-        private readonly int offset;
+        public int Offset { get; }
+
         public IntVector1(int value)
         {
-            offset = value;
+            Offset = value;
         }
 
         public static IntVector1 FromInt(int offset)
@@ -27,22 +25,12 @@ namespace Cint.RobotCleaner.Tests
 
         public IntVector1 Translate(IntVector1 other)
         {
-            return new IntVector1(offset + other.offset);
-        }
-
-        public IEnumerable<IntVector1> GetIntermediatePoints(IntVector1 other)
-        {
-            var range = Enumerable
-                .Range(Math.Min(offset, other.offset), Math.Abs(other.offset - offset) + 1)
-                .Select(FromInt);
-            return offset > other.offset
-                ? range.Reverse()
-                : range;
+            return new IntVector1(Offset + other.Offset);
         }
 
         public bool Equals(IntVector1 other)
         {
-            return offset == other.offset;
+            return Offset == other.Offset;
         }
 
         public override bool Equals(object obj)
@@ -53,7 +41,7 @@ namespace Cint.RobotCleaner.Tests
 
         public override int GetHashCode()
         {
-            return offset;
+            return Offset;
         }
     }
 }

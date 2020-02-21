@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Cint.RobotCleaner.Core
 {
@@ -15,13 +14,5 @@ namespace Cint.RobotCleaner.Core
         /// <param name="other">Value to translate by</param>
         /// <returns>A new translated coordinate</returns>
         TCoordinate Translate(TCoordinate other);
-
-        /// <summary>
-        /// Returns all the intermediate points when following from <b>this</b> coordinate to the
-        /// <b>other</b>.
-        /// </summary>
-        /// <param name="other">Target point of the intermediate calculation</param>
-        /// <returns>An enumerable of intermediate points</returns>
-        IEnumerable<TCoordinate> GetIntermediatePoints(TCoordinate other);
     }
 }
