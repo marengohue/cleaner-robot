@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Cint.RobotCleaner.Core.Impl
 {
     /// <inheritdoc cref="ITranslatable{TCoordinate}"/>
+    [DebuggerDisplay("v2({X};{Y})")]
     public struct IntVector2 : ITranslatable<IntVector2>
     {
         public IntVector2(int x, int y)
