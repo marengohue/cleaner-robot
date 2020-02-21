@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cint.RobotCleaner.Client\Cint.RobotCleaner.Client.csproj" />
     <ProjectReference Include="..\Cint.RobotCleaner.Core\Cint.RobotCleaner.Core.csproj" />
   </ItemGroup>
 
