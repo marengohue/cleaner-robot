@@ -5,6 +5,10 @@ using Cint.RobotCleaner.Core;
 
 namespace Cint.RobotCleaner.Tests
 {
+    /// <summary>
+    /// A sample test implementation for a 1D pathfinder
+    /// Really simple and is used instead of a Mock inside the unit tests
+    /// </summary>
     class OneDPathfinder : IPathFinder<IntVector1>
     {
         public IEnumerable<IntVector1> BuildPath(IntVector1 from, IntVector1 to)

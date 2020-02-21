@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Cint.RobotCleaner.Core;
-using Cint.RobotCleaner.Core.Impl;
+﻿using Cint.RobotCleaner.Core.Impl;
 using NUnit.Framework;
 
 namespace Cint.RobotCleaner.Tests

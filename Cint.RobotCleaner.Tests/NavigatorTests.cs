@@ -1,6 +1,7 @@
 using System;
 using Cint.RobotCleaner.Core;
 using Cint.RobotCleaner.Core.Impl;
+using Moq;
 using NUnit.Framework;
 
 namespace Cint.RobotCleaner.Tests
@@ -9,17 +10,23 @@ namespace Cint.RobotCleaner.Tests
     {
         private IPathFinder<IntVector1> oneDPathFinder;
 
+        private Mock<IPathFinder<IntVector2>> twoDPathFinder;
+
         [SetUp]
         public void Setup()
         {
             oneDPathFinder = new OneDPathfinder();
+            twoDPathFinder = new Mock<IPathFinder<IntVector2>>();
+            twoDPathFinder
+                .Setup(pf => pf.BuildPath(It.IsAny<IntVector2>(), It.IsAny<IntVector2>()))
+                .Returns(new IntVector2[] {});
         }
 
         [Test]
         public void Navigator_ShouldValidateInputValues()
         {
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.DoesNotThrow(() => new Navigator<IntVector2>(new IntVector2(0, 0), null));
+            Assert.DoesNotThrow(() => new Navigator<IntVector2>(new IntVector2(0, 0), twoDPathFinder.Object));
             AssertOutOfBounds(1000001, 0);
             AssertOutOfBounds(0, 1000001);
             AssertOutOfBounds(0, -1000001);
@@ -30,7 +37,7 @@ namespace Cint.RobotCleaner.Tests
         [Test]
         public void Navigator_CanMove()
         {
-            var navigator = new Navigator<IntVector2>(new IntVector2(0, 0), null);
+            var navigator = new Navigator<IntVector2>(new IntVector2(0, 0), twoDPathFinder.Object);
             navigator.Move(new IntVector2(1,0));
             Assert.AreEqual(new IntVector2(1, 0), navigator.CurrentPosition);
             navigator.Move(new IntVector2(1, 0));
@@ -73,10 +80,10 @@ namespace Cint.RobotCleaner.Tests
             Assert.AreEqual(4, navigator.DistinctPointsVisited);
         }
 
-        private static void AssertOutOfBounds(int x, int y)
+        private void AssertOutOfBounds(int x, int y)
         {
             // ReSharper disable once ObjectCreationAsStatement
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Navigator<IntVector2>(new IntVector2(x, y), null));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Navigator<IntVector2>(new IntVector2(x, y), twoDPathFinder.Object));
         }
     }
 }
