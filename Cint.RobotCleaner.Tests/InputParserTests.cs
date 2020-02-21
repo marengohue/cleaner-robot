@@ -10,7 +10,7 @@ namespace Cint.RobotCleaner.Tests
     public class InputParserTests
     {
 
-        private string sampleInput = "5\n10 20\nE 2\nN 1\nW 5\nS 4\nW 3";
+        private readonly string sampleInput = "5\n10 20\nE 2\nN 1\nW 5\nS 4\nW 3";
 
         private Stream GetSampleStream(string sampleData)
         {

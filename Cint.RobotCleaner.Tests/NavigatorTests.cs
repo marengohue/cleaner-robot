@@ -76,7 +76,7 @@ namespace Cint.RobotCleaner.Tests
             Assert.AreEqual(4, navigator.DistinctPointsVisited);
 
             var navigator2 = new Navigator<IntVector1>(IntVector1.FromInt(0), oneDPathFinder);
-            navigator.Move(IntVector1.FromInt(-3));
+            navigator2.Move(IntVector1.FromInt(-3));
             Assert.AreEqual(4, navigator.DistinctPointsVisited);
         }
 

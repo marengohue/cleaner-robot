@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Cint.RobotCleaner.Core.Impl
 {
     /// <inheritdoc cref="ITranslatable{TCoordinate}"/>
-    [DebuggerDisplay("v2({X};{Y})")]
+    [DebuggerDisplay("v1({" + nameof(X) + ";" + nameof(Y) + "})")]
     public struct IntVector2 : ITranslatable<IntVector2>
     {
         public IntVector2(int x, int y)
@@ -23,6 +23,11 @@ namespace Cint.RobotCleaner.Core.Impl
             return X == other.X && Y == other.Y;
         }
 
+        /// <summary>
+        /// Add the vector to another vector
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public IntVector2 Translate(IntVector2 other)
         {
             return new IntVector2(X + other.X, Y + other.Y);

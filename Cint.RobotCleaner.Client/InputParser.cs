@@ -85,14 +85,14 @@ namespace Cint.RobotCleaner.Client
 
         private (int, int) GetVectorFromDirection(string part)
         {
-            switch (part.ToLowerInvariant())
+            return part.ToLowerInvariant() switch
             {
-                case "n": return (0, 1);
-                case "e": return (1, 0);
-                case "s": return (0, -1);
-                case "w": return (-1, 0);
-                default: throw new FormatException("Unable to determine the direction.");
-            }
+                "n" => (0, 1),
+                "e" => (1, 0),
+                "s" => (0, -1),
+                "w" => (-1, 0),
+                _ => throw new FormatException("Unable to determine the direction.")
+            };
         }
 
         private void EnsureStartingPoint()

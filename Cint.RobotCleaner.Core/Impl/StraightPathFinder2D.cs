@@ -6,6 +6,13 @@ namespace Cint.RobotCleaner.Core.Impl
 {
     public class StraightPathFinder2D : IPathFinder<IntVector2>
     {
+        /// <summary>
+        /// Builds a straight path from <see cref="from"/> to <see cref="to"/>
+        /// Fails when trying to build curved or non-straight paths
+        /// </summary>
+        /// <param name="from">Start point</param>
+        /// <param name="to">End point</param>
+        /// <returns></returns>
         public IEnumerable<IntVector2> BuildPath(IntVector2 from, IntVector2 to)
         {
             var diff = new IntVector2(to.X - from.X, to.Y - from.Y);

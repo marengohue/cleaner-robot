@@ -27,6 +27,10 @@ namespace Cint.RobotCleaner.Core.Impl
             RememberPoint(CurrentPosition);
         }
 
+        /// <summary>
+        /// Move a navigator in the given direction
+        /// </summary>
+        /// <param name="direction"></param>
         public void Move(TCoordinate direction)
         {
             var resultingPosition = CurrentPosition.Translate(direction);
