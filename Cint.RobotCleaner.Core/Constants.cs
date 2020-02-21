@@ -1,6 +1,6 @@
 ﻿namespace Cint.RobotCleaner.Core
 {
-    class Constants
+    public class Constants
     {
         /// <summary>
         /// Absolute coordinate bound as per defined by the requirements
