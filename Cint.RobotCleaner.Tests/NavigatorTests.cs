@@ -1,5 +1,4 @@
 using System;
-using System.Numerics;
 using Cint.RobotCleaner.Core;
 using NUnit.Framework;
 
@@ -34,6 +33,40 @@ namespace Cint.RobotCleaner.Tests
             Assert.AreEqual(new IntVector2(2, 0), navigator.CurrentPosition);
             navigator.Move(new IntVector2(0, 1));
             Assert.AreEqual(new IntVector2(2, 1), navigator.CurrentPosition);
+        }
+
+        [Test]
+        public void Navigator_CanRememberTouchedPoints()
+        {
+            var plusOne = IntVector1.FromInt(1);
+            var navigator = new Navigator<IntVector1>(IntVector1.FromInt(0));
+            navigator.Move(plusOne);
+            navigator.Move(plusOne);
+            Assert.AreEqual(3, navigator.DistinctPointsVisited);
+            navigator.Move(plusOne);
+            Assert.AreEqual(4, navigator.DistinctPointsVisited);
+        }
+
+        [Test]
+        public void Navigator_DoesNotRememberAlreadyTouchedPoints()
+        {
+            var navigator = new Navigator<IntVector1>(IntVector1.FromInt(0));
+            navigator.Move(IntVector1.FromInt(1));
+            Assert.AreEqual(2, navigator.DistinctPointsVisited);
+            navigator.Move(IntVector1.FromInt(-1));
+            Assert.AreEqual(2, navigator.DistinctPointsVisited);
+        }
+
+        [Test]
+        public void Navigator_RemembersIntermediatePointsOfTravel()
+        {
+            var navigator = new Navigator<IntVector1>(IntVector1.FromInt(0));
+            navigator.Move(IntVector1.FromInt(3));
+            Assert.AreEqual(4, navigator.DistinctPointsVisited);
+
+            var navigator2 = new Navigator<IntVector1>(IntVector1.FromInt(0));
+            navigator.Move(IntVector1.FromInt(-3));
+            Assert.AreEqual(4, navigator.DistinctPointsVisited);
         }
 
         private static void AssertOutOfBounds(int x, int y)
