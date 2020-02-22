@@ -16,3 +16,7 @@ The test solution also implements the pathfinder/coordinate pair for a 1D robot,
 ### A note about performance
 The distinct tile count calculation is performed in constant time ```O(1)```.    
 The move operation is performed in time proportional to the length of the move ``` O(N) ``` which means in total, the performance of the entire test client is quadratic - proportional to ``` O(N*M) ```, where ``` N ``` is maximum length of the move, ``` M ``` is the maximum amount of moves. However, this is barely notable during a real use as robot is not going to move a sizeable distance in an instant.
+
+### A note about memory usage
+It is possible that the app runs out of memory with the current implementation n case of high ``` M ``` and ``` N ``` values, due to a use of single HashSet and GC limitations on big objects in memory, however several optimizations (Like using a HashSet of HashSets for each distinct component of the coordinate) can be implemented if the support for large values need to be added.
+The optimization would have to be implemented for a particular coordinate system and would not be as generic and coordinate-agnostic, so it has been left out of the default implementation.
